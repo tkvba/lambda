@@ -1,23 +1,22 @@
-kind: pipeline
+ind: pipeline
 name: default
 
 steps:
 - name: build
   image: python:3.6-alpine
   commands:
-      - apk update && apk add zip
-      - zip -r -9 transaction-1.zip *
-
-- name: s3-publish:
-    image: plugins/s3
-    settings:
-      access_key: AKIA3B4U6ZRO63IEEKZB
-      secret_key: 
-        from_secret: p_aws
-    acl: private
+  - apk update && apk add zip
+  - zip -r -9 transaction-1.zip *
+  
+- name: s3-publish
+  image: plugins/s3
+  settings:
+    access_key: AKIA3B4U6ZRO63IEEKZB
+    secret_key: 
+      from_secret: p_aws
     region: us-west-2
     bucket: tkharness
     source: transaction-1.zip
-  when:
-    event:
-    - push
+    when:
+      event:
+      - push
