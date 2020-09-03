@@ -7,7 +7,13 @@ steps:
   commands:
       - apk update && apk add zip
       - pip install -r requirements.txt -t .
-      - zip -r -9 lambda-project-${DRONE_BUILD_NUMBER}.zip *
+      - zip -r -9 transaction-${DRONE_BUILD_NUMBER}.zip *
+  s3-publish:
+    image: plugins/s3
+    acl: private
+    region: us-west-2
+    bucket: tkharness
+    source: transaction-${DRONE_BUILD_NUMBER}.zip
   when:
     event:
     - push
