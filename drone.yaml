@@ -10,6 +10,10 @@ steps:
       - zip -r -9 transaction-${DRONE_BUILD_NUMBER}.zip *
   s3-publish:
     image: plugins/s3
+    settings:
+      access_key: AKIA3B4U6ZRO63IEEKZB
+      secret_key: 
+        from_secret: p_aws
     acl: private
     region: us-west-2
     bucket: tkharness
