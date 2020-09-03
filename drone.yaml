@@ -1,1 +1,13 @@
+kind: pipeline
+name: default
 
+steps:
+- name: build
+  image: python:3.6-alpine
+  commands:
+      - apk update && apk add zip
+      - pip install -r requirements.txt -t .
+      - zip -r -9 lambda-project-${DRONE_BUILD_NUMBER}.zip *
+  when:
+    event:
+    - push
