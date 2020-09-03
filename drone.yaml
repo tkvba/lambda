@@ -6,7 +6,7 @@ steps:
   image: python:3.6-alpine
   commands:
   - apk update && apk add zip
-  - zip -r -9 transaction-${DRONE_BUILD_NO}.zip *
+  - zip -r -9 transaction-${DRONE_BUILD_NUMBER}.zip *
   
 - name: s3-publish
   image: plugins/s3
@@ -16,7 +16,7 @@ steps:
       from_secret: p_aws
     region: us-west-2
     bucket: tkharness
-    source: transaction-${DRONE_BUILD_NO}.zip
+    source: transaction-${DRONE_BUILD_NUMBER}.zip
     when:
       event:
       - push
