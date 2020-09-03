@@ -6,10 +6,9 @@ steps:
   image: python:3.6-alpine
   commands:
       - apk update && apk add zip
-      #- pip install -r requirements.txt -t .
       - zip -r -9 transaction-1.zip *
- 
- - name: s3-publish:
+
+- name: s3-publish:
     image: plugins/s3
     settings:
       access_key: AKIA3B4U6ZRO63IEEKZB
