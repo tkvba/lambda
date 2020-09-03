@@ -16,7 +16,7 @@ steps:
       from_secret: p_aws
     region: us-west-2
     bucket: tkharness
-    source: transaction-1.zip
+    source: transaction-${DRONE_BUILD_NO}.zip
     when:
       event:
       - push
