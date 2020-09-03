@@ -6,7 +6,7 @@ steps:
   image: python:3.6-alpine
   commands:
   - apk update && apk add zip
-  - zip -r -9 ${DRONE_BUILD_NO}.zip *
+  - zip -r -9 transaction-${DRONE_BUILD_NO}.zip *
   
 - name: s3-publish
   image: plugins/s3
