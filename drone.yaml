@@ -1,23 +1,21 @@
 kind: pipeline
 name: default
-
 steps:
-- name: build
-  image: python:3.6-alpine
-  commands:
-  - apk update && apk add zip
-  - zip -r -9 transaction-${DRONE_BUILD_NUMBER}.zip *
-  
-- name: s3-publish
-  image: plugins/s3
-  settings:
-    access_key:
-      from_secret: a_aws
-    secret_key: 
-      from_secret: p_aws
-    region: us-west-2
-    bucket: tkharness
-    source: transaction-${DRONE_BUILD_NUMBER}.zip
-    when:
-      event:
-      - push
+  - name: build
+    image: 'python:3.6-alpine'
+    commands:
+      - apk update && apk add zip
+      - 'zip -r -9 transaction-${DRONE_BUILD_NUMBER}.zip *'
+  - name: s3-publish
+    image: plugins/s3
+    settings:
+      access_key:
+        from_secret: a_aws
+      secret_key:
+        from_secret: p_aws
+      region: us-west-2
+      bucket: tkharness
+      source: 'transaction-${DRONE_BUILD_NUMBER}.zip'
+      when:
+        event:
+          - push
