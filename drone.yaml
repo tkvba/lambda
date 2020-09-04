@@ -23,7 +23,7 @@ steps:
       - push
    
 - name: harness-deploy
-  image: luisredda/drone-simple-plugin
+  image: plugins/s3
   settings:  
     application: "TK"
     workflow: "TKTransactionLambda"
