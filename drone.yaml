@@ -11,7 +11,8 @@ steps:
 - name: s3-publish
   image: plugins/s3
   settings:
-    access_key: AKIA3B4U6ZRO63IEEKZB
+    access_key:
+      from_secret: a_aws
     secret_key: 
       from_secret: p_aws
     region: us-west-2
