@@ -21,3 +21,17 @@ steps:
     when:
       event:
       - push
+   
+- name: harness-deploy
+  image: luisredda/drone-simple-plugin
+  settings:  
+    application: "TK"
+    workflow: "TKTransactionLambda"
+    service: "TKTransactionLambda"
+    build: "${DRONE_BUILD_NUMBER"
+    accountid:
+      from_secret: harness_acctid
+    apikey: 
+      from_secret: harness_secret
+    body: |
+      any other payload here
